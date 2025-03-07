@@ -113,6 +113,7 @@ if IS_HEROKU_APP:
             conn_health_checks=True,
             ssl_require=True,
         ),
+        "ENGINE": "django.db.backends.postgresql"
     }
 else:
     # When running locally in development or in CI, a sqlite database file will be used instead
