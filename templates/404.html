@@ -1,0 +1,23 @@
+{% extends 'dserv/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+<div class="container text-center">
+  <p class="fs-1 mt-3 fw-bold">Erro 404 - Página não encontrada</p>
+</div>
+{% endblock page_header %}
+
+{% block content %}
+<div class="container text-center">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <p class="lead">A página que você está tentando acessar não existe.</p>
+          <p>Verifique o endereço digitado ou retorne à <a href="{% url 'dserv:index' %}">página inicial</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

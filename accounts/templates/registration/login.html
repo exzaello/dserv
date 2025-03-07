@@ -1,0 +1,30 @@
+{% extends 'dserv/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+<div class="container text-center">
+  <p class="fs-1 mt-3 fw-bold">Login</p>
+</div>
+{% endblock page_header %}
+
+{% block content %}
+<div class="container text-start">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form show_label=False %}
+            <button type="submit" class="btn btn-primary">Entrar</button>
+          </form>
+          <hr>
+          <p class="mt-3">
+            Não tem uma conta? <a href="{% url 'accounts:register' %}">Registre-se aqui</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

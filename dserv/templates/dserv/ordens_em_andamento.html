@@ -1,0 +1,88 @@
+{% extends 'dserv/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+<div class="container text-center">
+  <p class="fs-1 mt-3 fw-bold">Em Andamento</p>
+</div>
+{% endblock page_header %}
+
+{% block content %}
+<div class="container text-center">
+  <!-- Página dividida em três colunas para alinhar a tabela no centro -->
+  <div class="row align-items-center">
+    <!-- Coluna 1 -->
+    <div class="col">
+    </div>
+    <!-- Coluna 2 com a tabela -->
+    <div class="col-8">
+      {% for mes in meses_pagamento %}
+        <h5 class="mt-4 text-start">Referência: {{ mes.mes_pgto }}</h5>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Número</th>
+              <th scope="col">Ano</th>
+              <th scope="col">Processo</th>
+              <th colspan="2" scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for ordem in mes.ordens_em_andamento %}
+              <tr>
+                <td>{{ ordem.numero|stringformat:"03d" }}</td>
+                <td>{{ ordem.ano }}</td>
+                <td class="text-nowrap">{{ ordem.processo }}</td>
+                <!-- (INICIO) Coluna com link collapse para detalhes -->
+                <td>
+                  <a href="#"
+                    class="link-dark link-opacity-25-hover link-underline-opacity-0"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#detalhes{{ ordem.id }}"
+                    aria-expanded="false"
+                    aria-controls="detalhes{{ ordem.id }}"
+                  >
+                    Detalhes
+                  </a>
+                </td>
+                <!-- (FIM) Coluna com link collapse para detalhes -->
+                <td>
+                  <a href="{% url 'dserv:editar_ordem' ordem.id %}" class="link-dark link-opacity-25-hover link-underline-opacity-0">Editar</a>
+                </td>
+              </tr>
+
+              <!-- (INICIO) Trecho exibido no collapse -->
+              <tr id="detalhes{{ ordem.id }}" class="collapse">
+                <td colspan="5">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="text-start text-break">
+                        <b>Descrição: </b>{{ ordem.descricao }}
+                      </div>
+                      <div class="text-start">
+                        <b>Blocos:</b>
+                        <ul>
+                          {% for valor_por_bloco in ordem.valor_por_bloco.all %}
+                            <li>{{ valor_por_bloco.bloco.nome_bloco }} - R$ {{ valor_por_bloco.valor_bloco|floatformat:2 }}</li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <!-- (FIM) Trecho exibido no collapse -->
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endfor %}
+    </div>
+    <!-- Coluna 3 -->
+    <div class="col">
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+
+

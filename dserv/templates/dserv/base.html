@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PREFCAM</title>
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm bg-body-tertiary">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">DSERV</span>
+        <button class="navbar-toggler" type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="{% url 'dserv:index' %}">Home</a>
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ordens</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'dserv:ordens_em_andamento' %}">Em andamento</a></li>
+                <li><a class="dropdown-item" href="{% url 'dserv:ordens_concluidas' %}">Concluídas</a></li>
+                <li><a class="dropdown-item" href="{% url 'dserv:cadastrar_ordem' %}">Nova Ordem</a></li>
+              </ul>
+            </div>
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Relatórios
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'dserv:relatorio_blocos' %}">Blocos</a></li>
+                <li><a class="dropdown-item" href="{% url 'dserv:listar_meses_pagamento' %}">Pagamento</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Menu de autenticação (alinhado à direita) -->
+          <div class="navbar-nav ms-auto">
+            {% if user.is_authenticated %}
+              <!-- Usuário logado -->
+              <span class="nav-link">Olá, {{ user.username }}</span>
+              <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+            {% else %}
+              <!-- Usuário não logado -->
+              <a class="nav-link" href="{% url 'accounts:register' %}">Registrar</a>
+              <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    {% block page_header %}{% endblock page_header %}
+    {% block content %}{% endblock content %}
+  </body>
+</html>
+
+
