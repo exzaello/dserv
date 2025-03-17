@@ -21,35 +21,37 @@
         </thead>
         <tbody>
           {% for bloco in blocos %}
-            <tr style="background-color: #f8f9fa;"> <!-- Cor cinza claro -->
+            <tr style="background-color: #f8f9fa;" data-bs-toggle="collapse" href="#collapse{{ forloop.counter }}" role="button" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
               <td>{{ bloco.nome_bloco }}</td>
               <td>{{ bloco.total_gasto|default:"0.00"|br_currency }}</td>
             </tr>
             {% if bloco.ordens %}
               <tr>
-                <td colspan="2">
-                  <table class="table mb-0">
-                    <thead>
-                      <tr>
-                        <th>Número</th>
-                        <th>Ano</th>
-                        <th>Emissão</th>
-                        <th>Conclusão</th>
-                        <th>Valor</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for ordem in bloco.ordens %}
+                <td colspan="2" class="p-0">
+                  <div class="collapse" id="collapse{{ forloop.counter }}">
+                    <table class="table mb-0">
+                      <thead>
                         <tr>
-                          <td>{{ ordem.numero|stringformat:"03d" }}</td>
-                          <td>{{ ordem.ano }}</td>
-                          <td>{{ ordem.data_emissao|date:"d/m/Y" }}</td>
-                          <td>{{ ordem.data_conclusao|date:"d/m/Y" }}</td>
-                          <td>{{ ordem.valor_bloco|default:"0.00"|br_currency }}</td>
+                          <th>Número</th>
+                          <th>Ano</th>
+                          <th>Emissão</th>
+                          <th>Conclusão</th>
+                          <th>Valor</th>
                         </tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        {% for ordem in bloco.ordens %}
+                          <tr>
+                            <td>{{ ordem.numero|stringformat:"03d" }}</td>
+                            <td>{{ ordem.ano }}</td>
+                            <td>{{ ordem.data_emissao|date:"d/m/Y" }}</td>
+                            <td>{{ ordem.data_conclusao|date:"d/m/Y" }}</td>
+                            <td>{{ ordem.valor_bloco|default:"0.00"|br_currency }}</td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
                 </td>
               </tr>
             {% endif %}

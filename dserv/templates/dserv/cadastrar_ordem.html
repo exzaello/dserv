@@ -32,25 +32,25 @@
           <div class="row">
             <!-- Coluna 1 -->
             <div class="col-md-6">
-              {% bootstrap_field form.numero %}
-              {% bootstrap_field form.data_emissao %}
-              {% bootstrap_field form.processo %}
-              {% bootstrap_field form.prazo %}
-              {% bootstrap_field form.data_conclusao %}
+              {% bootstrap_field form.numero field_class='form-control' placeholder='' %}
+              {% bootstrap_field form.data_emissao field_class='form-control' placeholder='' %}
+              {% bootstrap_field form.processo field_class='form-control' placeholder='' %}
+              {% bootstrap_field form.prazo field_class='form-control' placeholder='' %}
+              {% bootstrap_field form.data_conclusao field_class='form-control' placeholder='' %}
             </div>
             <!-- Coluna 2 -->
             <div class="col-md-6">
-              {% bootstrap_field form.ano %}
-              {% bootstrap_field form.fiscal %}
-              {% bootstrap_field form.categoria %}
-              {% bootstrap_field form.situacao %}
-              {% bootstrap_field form.mespgto %}
+              {% bootstrap_field form.ano field_class='form-control' placeholder='' %}
+              {% bootstrap_field form.fiscal field_class='form-control' placeholder='' %}
+              {% bootstrap_field form.categoria field_class='form-control' placeholder='' %}
+              {% bootstrap_field form.situacao field_class='form-control' placeholder='' %}
+              {% bootstrap_field form.mespgto field_class='form-control' placeholder='' %}
             </div>
           </div>
           <!-- Descrição (ocupa toda a largura) -->
           <div class="row">
             <div class="col-md-12">
-              {% bootstrap_field form.descricao %}
+              {% bootstrap_field form.descricao field_class='form-control' placeholder='' %}
             </div>
           </div>
         </div>
