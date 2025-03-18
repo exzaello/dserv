@@ -28,7 +28,7 @@ def index(request):
             'ordemdeservico__empenhos_utilizados__valor_utilizado',
             filter=Q(ordemdeservico__situacao=situacao_concluido)
         )
-    )
+    ).order_by('id')
 
     # Valor total utilizado para cada empenho cadastrado, valor empenhado e saldo atual do empenho
     empenhos_info = Empenho.objects.annotate(
