@@ -1,14 +1,34 @@
-from django.utils import timezone
+import os
+import django
+from datetime import datetime
+
+# Configurações do Django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'projeto_ufac.settings')
+django.setup()
+
 from dserv.models import OrdemDeServico, Fiscal, Categoria, Situacao, MesPagamento
 
-# Dados das ordens de serviço de 50 a 100
+# Dados das ordens de serviço
 ordens = [
     {
         "numero": 51,
         "ano": 2025,
+        "processo": "23107.000289/2025-31",
+        "prazo": 1,
+        "data_emissao": datetime(2025, 1, 29),
+        "data_conclusao": None,
+        "fiscal": "Edilberto Ferreira Jansen Júnior",
+        "categoria": "EMERGENCIAL",
+        "situacao": "EM ANDAMENTO",
+        "mespgto": "fevereiro/2025",
+        "descricao": "Manutenção da pia da sala de indução que está entupida."
+    },
+    {
+        "numero": 52,
+        "ano": 2025,
         "processo": "23107.000489/2025-93",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 1, 29),
+        "data_emissao": datetime(2025, 1, 29),
         "data_conclusao": None,
         "fiscal": "Edilberto Ferreira Jansen Júnior",
         "categoria": "EMERGENCIAL",
@@ -17,11 +37,11 @@ ordens = [
         "descricao": "Registro do mictório do banheiro masculino do Laboratório de Anatomia."
     },
     {
-        "numero": 52,
+        "numero": 53,
         "ano": 2025,
         "processo": "23107.000466/2025-89",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 1, 29),
+        "data_emissao": datetime(2025, 1, 29),
         "data_conclusao": None,
         "fiscal": "Emerson Henrique Costa de Araújo",
         "categoria": "EMERGENCIAL",
@@ -30,11 +50,11 @@ ordens = [
         "descricao": "Manutenção nos banheiros, dos alunos, masculino e feminino."
     },
     {
-        "numero": 53,
+        "numero": 54,
         "ano": 2025,
         "processo": "23107.032660/2024-42",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 1, 29),
+        "data_emissao": datetime(2025, 1, 29),
         "data_conclusao": None,
         "fiscal": "Edilberto Ferreira Jansen Júnior",
         "categoria": "EMERGENCIAL",
@@ -43,25 +63,12 @@ ordens = [
         "descricao": "Manutenção no banheiro feminino da PROPEG, suporte de papel higiênico, troca de uma tampa do vaso que está quebrada, a troca de uma descarga que esta vazando água, bem como a reposição de um chuveiro comum."
     },
     {
-        "numero": 54,
-        "ano": 2025,
-        "processo": "23107.000902/2025-10",
-        "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 1, 29),
-        "data_conclusao": None,
-        "fiscal": "Edilberto Ferreira Jansen Júnior",
-        "categoria": "EMERGENCIAL",
-        "situacao": "EM ANDAMENTO",
-        "mespgto": "fevereiro/2025",
-        "descricao": "Reparo da curva do encanamento está frouxa e vazando água quando a bomba é ligada."
-    },
-    {
         "numero": 56,
         "ano": 2025,
         "processo": "23107.003042/2025-76",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 1, 29),
-        "data_conclusao": timezone.datetime(2025, 2, 7),
+        "data_emissao": datetime(2025, 1, 29),
+        "data_conclusao": datetime(2025, 2, 7),
         "fiscal": "Emerson Henrique Costa de Araújo",
         "categoria": "EMERGENCIAL",
         "situacao": "CONCLUIDO",
@@ -73,7 +80,7 @@ ordens = [
         "ano": 2025,
         "processo": "23107.000561/2025-82",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 1, 29),
+        "data_emissao": datetime(2025, 1, 29),
         "data_conclusao": None,
         "fiscal": "Emerson Henrique Costa de Araújo",
         "categoria": "EMERGENCIAL",
@@ -86,7 +93,7 @@ ordens = [
         "ano": 2025,
         "processo": "23107.003333/2025-64",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 1, 30),
+        "data_emissao": datetime(2025, 1, 30),
         "data_conclusao": None,
         "fiscal": "Edilberto Ferreira Jansen Júnior",
         "categoria": "EMERGENCIAL",
@@ -99,7 +106,7 @@ ordens = [
         "ano": 2025,
         "processo": "23107.003393/2025-87",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 1, 30),
+        "data_emissao": datetime(2025, 1, 30),
         "data_conclusao": None,
         "fiscal": "Edilberto Ferreira Jansen Júnior",
         "categoria": "EMERGENCIAL",
@@ -112,7 +119,7 @@ ordens = [
         "ano": 2025,
         "processo": "23107.002672/2025-23",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 1, 30),
+        "data_emissao": datetime(2025, 1, 30),
         "data_conclusao": None,
         "fiscal": "Emerson Henrique Costa de Araújo",
         "categoria": "EMERGENCIAL",
@@ -125,20 +132,20 @@ ordens = [
         "ano": 2025,
         "processo": "23107.002616/2025-99",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 1, 31),
+        "data_emissao": datetime(2025, 1, 31),
         "data_conclusao": None,
         "fiscal": "Emerson Henrique Costa de Araújo",
         "categoria": "EMERGENCIAL",
         "situacao": "EM ANDAMENTO",
         "mespgto": "fevereiro/2025",
-        "descricao": "manutenção nos vasos sanitários do banheiro feminino do Restaurante Universitário, box 2 e 3, visto que as descargas não estão funcionando e mesmo assim fica vazando grande quantidade de água."
+        "descricao": "Manutenção nos vasos sanitários do banheiro feminino do Restaurante Universitário, box 2 e 3, visto que as descargas não estão funcionando e mesmo assim fica vazando grande quantidade de água."
     },
     {
         "numero": 67,
         "ano": 2025,
         "processo": "23107.003414/2025-64",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 1, 31),
+        "data_emissao": datetime(2025, 1, 31),
         "data_conclusao": None,
         "fiscal": "Edilberto Ferreira Jansen Júnior",
         "categoria": "EMERGENCIAL",
@@ -151,7 +158,7 @@ ordens = [
         "ano": 2025,
         "processo": "23107.033398/2025-53",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 3),
+        "data_emissao": datetime(2025, 2, 3),
         "data_conclusao": None,
         "fiscal": "Edilberto Ferreira Jansen Júnior",
         "categoria": "EMERGENCIAL",
@@ -164,7 +171,7 @@ ordens = [
         "ano": 2025,
         "processo": "23107.033497/2025-35",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 3),
+        "data_emissao": datetime(2025, 2, 3),
         "data_conclusao": None,
         "fiscal": "Gerson Figueiredo de Oliveira",
         "categoria": "EMERGENCIAL",
@@ -177,20 +184,20 @@ ordens = [
         "ano": 2025,
         "processo": "23107.______/2025-__",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 5),
+        "data_emissao": datetime(2025, 2, 5),
         "data_conclusao": None,
         "fiscal": "Edilberto Ferreira Jansen Júnior",
         "categoria": "EMERGENCIAL",
         "situacao": "EM ANDAMENTO",
         "mespgto": "fevereiro/2025",
-        "descricao": "Manutenção, reparo e troca dos itens danificados nos banheiros masculinos e femininos"
+        "descricao": "Manutenção, reparo e troca dos itens danificados nos banheiros masculinos e femininos."
     },
     {
         "numero": 79,
         "ano": 2025,
         "processo": "23107.028223/2024-24",
         "prazo": 30,
-        "data_emissao": timezone.datetime(2025, 2, 5),
+        "data_emissao": datetime(2025, 2, 5),
         "data_conclusao": None,
         "fiscal": "Paulo Roberto de Lima Mendes",
         "categoria": "ORDINARIA",
@@ -203,7 +210,7 @@ ordens = [
         "ano": 2025,
         "processo": "23107.003902/2025-71",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 5),
+        "data_emissao": datetime(2025, 2, 5),
         "data_conclusao": None,
         "fiscal": "Emerson Henrique Costa de Araújo",
         "categoria": "EMERGENCIAL",
@@ -216,20 +223,20 @@ ordens = [
         "ano": 2025,
         "processo": "23107.032864/2024-83",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 6),
+        "data_emissao": datetime(2025, 2, 6),
         "data_conclusao": None,
         "fiscal": "Edilberto Ferreira Jansen Júnior",
         "categoria": "EMERGENCIAL",
         "situacao": "EM ANDAMENTO",
         "mespgto": "fevereiro/2025",
-        "descricao": "manutenção numa Prancha/peça de madeira da passarela"
+        "descricao": "Manutenção numa Prancha/peça de madeira da passarela."
     },
     {
         "numero": 85,
         "ano": 2025,
         "processo": "23107.022597/2025-36",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 6),
+        "data_emissao": datetime(2025, 2, 6),
         "data_conclusao": None,
         "fiscal": "Edilberto Ferreira Jansen Júnior",
         "categoria": "EMERGENCIAL",
@@ -242,7 +249,7 @@ ordens = [
         "ano": 2025,
         "processo": "23107.017540/2025-34",
         "prazo": 30,
-        "data_emissao": timezone.datetime(2025, 2, 6),
+        "data_emissao": datetime(2025, 2, 6),
         "data_conclusao": None,
         "fiscal": "Emerson Henrique Costa de Araújo",
         "categoria": "ORDINARIA",
@@ -255,7 +262,7 @@ ordens = [
         "ano": 2025,
         "processo": "23107.004071/2025-55",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 6),
+        "data_emissao": datetime(2025, 2, 6),
         "data_conclusao": None,
         "fiscal": "Edilberto Ferreira Jansen Júnior",
         "categoria": "EMERGENCIAL",
@@ -268,7 +275,7 @@ ordens = [
         "ano": 2025,
         "processo": "23107.004135/2025-18",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 6),
+        "data_emissao": datetime(2025, 2, 6),
         "data_conclusao": None,
         "fiscal": "Edilberto Ferreira Jansen Júnior",
         "categoria": "EMERGENCIAL",
@@ -281,46 +288,46 @@ ordens = [
         "ano": 2025,
         "processo": "23107.004333/2025-81",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 6),
+        "data_emissao": datetime(2025, 2, 6),
         "data_conclusao": None,
         "fiscal": "Emerson Henrique Costa de Araújo",
         "categoria": "EMERGENCIAL",
         "situacao": "EM ANDAMENTO",
         "mespgto": "fevereiro/2025",
-        "descricao": "troca/substituição das fechaduras"
+        "descricao": "Troca/substituição das fechaduras."
     },
     {
         "numero": 91,
         "ano": 2025,
         "processo": "23107.004157/2025-88",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 6),
+        "data_emissao": datetime(2025, 2, 6),
         "data_conclusao": None,
         "fiscal": "Emerson Henrique Costa de Araújo",
         "categoria": "EMERGENCIAL",
         "situacao": "EM ANDAMENTO",
         "mespgto": "fevereiro/2025",
-        "descricao": "instalação de dispensador de sabonete"
+        "descricao": "Instalação de dispensador de sabonete."
     },
     {
         "numero": 92,
         "ano": 2025,
         "processo": "23107.003048/2025-43",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 6),
+        "data_emissao": datetime(2025, 2, 6),
         "data_conclusao": None,
         "fiscal": "Emerson Henrique Costa de Araújo",
         "categoria": "EMERGENCIAL",
         "situacao": "EM ANDAMENTO",
         "mespgto": "fevereiro/2025",
-        "descricao": "instalação de 4 suportes de papel toalha e  a instalação de 4 suportes para sabão líquido."
+        "descricao": "Instalação de 4 suportes de papel toalha e a instalação de 4 suportes para sabão líquido."
     },
     {
         "numero": 93,
         "ano": 2025,
         "processo": "23107.004123/2025-93",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 6),
+        "data_emissao": datetime(2025, 2, 6),
         "data_conclusao": None,
         "fiscal": "Edilberto Ferreira Jansen Júnior",
         "categoria": "EMERGENCIAL",
@@ -333,20 +340,20 @@ ordens = [
         "ano": 2025,
         "processo": "23107.003717/2025-87",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 6),
-        "data_conclusao": timezone.datetime(2025, 2, 17),
+        "data_emissao": datetime(2025, 2, 6),
+        "data_conclusao": datetime(2025, 2, 17),
         "fiscal": "Emerson Henrique Costa de Araújo",
         "categoria": "EMERGENCIAL",
         "situacao": "CONCLUIDO",
         "mespgto": "fevereiro/2025",
-        "descricao": "Desentupimento do Vaso Sanitario"
+        "descricao": "Desentupimento do Vaso Sanitario."
     },
     {
         "numero": 95,
         "ano": 2025,
         "processo": "23107.004317/2025-99",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 9),
+        "data_emissao": datetime(2025, 2, 9),
         "data_conclusao": None,
         "fiscal": "Emerson Henrique Costa de Araújo",
         "categoria": "EMERGENCIAL",
@@ -359,33 +366,33 @@ ordens = [
         "ano": 2025,
         "processo": "23107.022790/2025-77",
         "prazo": 30,
-        "data_emissao": timezone.datetime(2025, 2, 10),
+        "data_emissao": datetime(2025, 2, 10),
         "data_conclusao": None,
         "fiscal": "Lisângela Pazinatto",
         "categoria": "ORDINARIA",
         "situacao": "EM ANDAMENTO",
         "mespgto": "fevereiro/2025",
-        "descricao": "-manutenção e limpeza da calha de água pluvial;<br>-manutenção do forro de gesso."
+        "descricao": "Manutenção e limpeza da calha de água pluvial; manutenção do forro de gesso."
     },
     {
         "numero": 98,
         "ano": 2025,
         "processo": "23107.002410/2025-88",
         "prazo": 30,
-        "data_emissao": timezone.datetime(2025, 2, 10),
+        "data_emissao": datetime(2025, 2, 10),
         "data_conclusao": None,
         "fiscal": "Paulo Roberto de Lima Mendes",
         "categoria": "ORDINARIA",
         "situacao": "EM ANDAMENTO",
         "mespgto": "fevereiro/2025",
-        "descricao": "Reparo na pintura"
+        "descricao": "Reparo na pintura."
     },
     {
         "numero": 99,
         "ano": 2025,
         "processo": "23107.004330/2025-48",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 9),
+        "data_emissao": datetime(2025, 2, 9),
         "data_conclusao": None,
         "fiscal": "Emerson Henrique Costa de Araújo",
         "categoria": "EMERGENCIAL",
@@ -398,35 +405,35 @@ ordens = [
         "ano": 2025,
         "processo": "23107.003910/2025-18",
         "prazo": 1,
-        "data_emissao": timezone.datetime(2025, 2, 9),
+        "data_emissao": datetime(2025, 2, 9),
         "data_conclusao": None,
         "fiscal": "Edilberto Ferreira Jansen Júnior",
         "categoria": "EMERGENCIAL",
         "situacao": "EM ANDAMENTO",
         "mespgto": "fevereiro/2025",
-        "descricao": "Manutenção do telhado"
+        "descricao": "Manutenção do telhado."
     },
 ]
 
 # Inserção dos dados no banco de dados
 for ordem in ordens:
-    fiscal = Fiscal.objects.get(nome_fiscal=ordem["fiscal"])
-    categoria = Categoria.objects.get(categoria=ordem["categoria"])
-    situacao = Situacao.objects.get(situacao=ordem["situacao"])
-    mespgto = MesPagamento.objects.get(mes_pgto=ordem["mespgto"])
-
+    fiscal, _ = Fiscal.objects.get_or_create(nome_fiscal=ordem['fiscal'])
+    categoria, _ = Categoria.objects.get_or_create(categoria=ordem['categoria'])
+    situacao, _ = Situacao.objects.get_or_create(situacao=ordem['situacao'])
+    mespgto, _ = MesPagamento.objects.get_or_create(mes_pgto=ordem['mespgto'])
+    
     OrdemDeServico.objects.create(
-        numero=ordem["numero"],
-        ano=ordem["ano"],
-        processo=ordem["processo"],
-        prazo=ordem["prazo"],
-        data_emissao=ordem["data_emissao"],
-        data_conclusao=ordem["data_conclusao"],
+        numero=ordem['numero'],
+        ano=ordem['ano'],
+        processo=ordem['processo'],
+        prazo=ordem['prazo'],
+        data_emissao=ordem['data_emissao'],
+        data_conclusao=ordem['data_conclusao'],
         fiscal=fiscal,
         categoria=categoria,
         situacao=situacao,
         mespgto=mespgto,
-        descricao=ordem["descricao"]
+        descricao=ordem['descricao']
     )
 
-print("Ordens de serviço inseridas com sucesso!")
+print("Dados inseridos com sucesso!")
