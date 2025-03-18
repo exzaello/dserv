@@ -136,8 +136,6 @@ manutencoes = [
     {"num_os": 189, "ano_os": 2025, "bloco": "Serviço-Escola de Psicologia", "valor_manutencao": 2184.27, "sala": "corredor"},
 ]
 
-]
-
 # Inserção dos dados no banco de dados
 for manutencao in manutencoes:
     ordem = OrdemDeServico.objects.get(numero=manutencao['num_os'], ano=manutencao['ano_os'])
